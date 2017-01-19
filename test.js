@@ -57,6 +57,13 @@ describe("Creating new cities", function(){
         .send('name=Springfield&description=where+the+simpsons+live')
         .expect(/springfield/i, done);
     });
+
+    it("Validates the city name", function(done) {
+        request(app)
+        .post('/cities')
+        .send('name=&description=')
+        .expect(400, done);
+    });
 });
 describe("Deleting cities", function(){
     before (function() {
@@ -77,12 +84,4 @@ describe("Deleting cities", function(){
             done();
         });
     });
-    /*
-    it("Returns the city name", function(done) {
-        request(app)
-        .post('/cities')
-        .send('name=Springfield&description=where+the+simpsons+live')
-        .expect(/springfield/i, done);
-    });
-    */
 });

@@ -40,6 +40,9 @@ app.get("/cities", function(request, response) {
 
 app.post("/cities", parseUrlencoded, function(request, response) {
     var newCity = request.body;
+    if (!newCity.name || !newCity.description) {
+        return response.sendStatus(400);
+    }
     client.hset("cities", newCity.name, newCity.description, function(error) {
         if (error) {
             throw error;
@@ -55,15 +58,6 @@ app.delete("/cities/:name", function(request, response) {
         }
         return response.sendStatus(204);
     });
-    /*
-    var newCity = request.body;
-    client.hset("cities", newCity.name, newCity.description, function(error) {
-        if (error) {
-            throw error;
-        }
-        return response.status(201).json(newCity.name);
-    });
-    */
 });
 
 module.exports = app;
