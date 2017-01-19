@@ -48,4 +48,22 @@ app.post("/cities", parseUrlencoded, function(request, response) {
     });
 });
 
+app.delete("/cities/:name", function(request, response) {
+    client.hdel("cities", request.params.name, function(error) {
+        if (error) {
+            throw error;
+        }
+        return response.sendStatus(204);
+    });
+    /*
+    var newCity = request.body;
+    client.hset("cities", newCity.name, newCity.description, function(error) {
+        if (error) {
+            throw error;
+        }
+        return response.status(201).json(newCity.name);
+    });
+    */
+});
+
 module.exports = app;
