@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "body-parser": "^1.16.0",
+    "ejs": "^2.5.5",
     "express": "^4.14.0",
     "hiredis": "^0.5.0",
     "redis": "^2.6.5"
